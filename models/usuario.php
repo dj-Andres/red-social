@@ -30,5 +30,11 @@
         $this->objetos = $query->fetchall();
         return $this->objetos;
     }
+    function tabla_archivos(){
+      $sql="SHOW TABLE STATUS WHERE `Name` = 'archivos'";
+      $query=$this->acceso->prepare($sql);
+      $query->execute();
+      $this->objetos=$query->fetch_assoc();
+    }
   }
 ?>
