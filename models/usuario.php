@@ -34,7 +34,25 @@
       $sql="SHOW TABLE STATUS WHERE `Name` = 'archivos'";
       $query=$this->acceso->prepare($sql);
       $query->execute();
-      $this->objetos=$query->fetch_assoc();
+      $this->objetos=$query->fetchall();
+    }
+    function publicaciones($descripcion,$id){
+      $sql="INSERT INTO publicaciones(descripcion,fecha,usuario)VALUES(:descripcion,'now()',:id)";
+      $query=$this->acceso->prepare($sql);
+      $query->execute(array(':descripcion'=>$descripcion,':id'=>$id));
+      $this->objetos=$query->fetchall();
+    }
+    function ultima_publicacion($id){
+      $sql="SELECT id_publicacion FROM publicaciones WHERE usuario=:id";
+      $query=$this->acceso->prepare($sql);
+      $query->execute(array(':id'=>$id));
+      $this->objetos=$query->fetchall();
+    }
+    function archivos($id,$foto_name,$tipo,$tamaño,$id_publicacion,$filtro){
+      $sql="INSERT INTO archivos(usuario,ruta,tipo,size,publicacion,filtro,fecha)VALUES(:usuario,:foto,:tipo,:tamaño,:id,:filtro,'now()')";
+      $query=$this->acceso->prepare($sql);
+      $query->execute(array(':usuario'=>$id,':foto'=>$foto_name,':tipo'=>$tipo,':tamaño'=>$tamaño,':id'=>$id_publicacion,':filtro'=>$filtro));
+      $this->objetos=$query->fetchall();
     }
   }
 ?>

@@ -10,7 +10,7 @@
     <a href="perfil.php?username=<?php echo $_SESSION['usuario']; ?>">
       <img src="../img/icons/perfil.png" class="i-icon">
     </a>
-    <a href="../controllers/controller-logout.php">
+    <a href="../controllers/controlller-logout.php">
       <img src="../img/icons/close.png" class="i-icon" width="24px">
     </a>
   </div>
